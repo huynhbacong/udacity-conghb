@@ -1,0 +1,1 @@
+{"version":3,"file":"logError.js","sourceRoot":"","sources":["../../../src/routes/utilities/logError.ts"],"names":[],"mappings":";;AAEA,MAAM,QAAQ,GAAG,CAAC,GAAoB,EAAE,GAAqB,EAAE,IAAc,EAAQ,EAAE;IACnF,IAAI,GAAG,GAAG,GAAG,CAAC,GAAG,CAAC;IAClB,OAAO,CAAC,GAAG,CAAC,GAAG,GAAG,eAAe,GAAG,CAAC,OAAO,GAAG,CAAC,CAAC;IACjD,IAAI,EAAE,CAAC;AACX,CAAC,CAAA;AAED,kBAAe,QAAQ,CAAC"}
