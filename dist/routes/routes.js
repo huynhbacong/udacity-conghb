@@ -11,6 +11,6 @@ const routes = express_1.default.Router();
 routes.get('/', logger_1.default, logError_1.default, (req, res) => {
     res.send('api connected!');
 });
-routes.use('/images', images_1.default);
+routes.use('/images', (0, images_1.default)());
 exports.default = routes;
 //# sourceMappingURL=routes.js.map

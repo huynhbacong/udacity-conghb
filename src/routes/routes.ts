@@ -1,5 +1,5 @@
 import express from "express";
-import images from "./api/images";
+import imageRoute from "./api/images";
 import logger from "./utilities/logger";
 import logError from "./utilities/logError";
 
@@ -9,6 +9,6 @@ routes.get('/', logger, logError, (req, res) => {
     res.send('api connected!');
 });
 
-routes.use('/images', images);
+routes.use('/images', imageRoute());
 
 export default routes;

@@ -12,12 +12,6 @@
     "start": "nodemon src/*.ts"
   },
   "dependencies": {
-    "@types/express": "^4.17.17",
-    "@types/jasmine": "^4.3.5",
-    "@types/lodash": "^4.14.195",
-    "@types/node": "^20.4.0",
-    "@types/sharp": "^0.32.0",
-    "@types/supertest": "^2.0.12",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-typescript": "^3.0.0",
@@ -34,5 +28,13 @@
     "typescript": "^5.1.6"
   },
   "author": "cong",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jasmine": "^4.3.5",
+    "@types/lodash": "^4.14.196",
+    "@types/node": "^20.4.5",
+    "@types/sharp": "^0.32.0",
+    "@types/supertest": "^2.0.12"
+  }
 }

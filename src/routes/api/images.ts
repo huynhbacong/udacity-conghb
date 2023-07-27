@@ -9,14 +9,31 @@ export interface ImageInfo {
     height?: string;
 }
 
-images.get('/', async (req, res) => {
-    let param : ImageInfo = req.query; 
-    const imagePath = await imagesService(param);
-    
-    if (imagePath) {
-        //Send file to display image to api.
-        res.sendFile(imagePath, {root: './'});
-    }
-});
+const imageRoute = () : express.Router => {
+    images.get('/', async (req : express.Request, res : express.Response) : Promise<void> => {
+        if(req.query.width != null && isNaN(Number(req.query.width))) {
+            throw new Error("Width must be a number.");
+        };
 
-export default images;
+        if(req.query.height != null && isNaN(Number(req.query.height))) {
+            throw new Error("Height must be a number.");
+        };
+
+        const param : ImageInfo = {
+            filename: req.query.filename?.toString(),
+            width: req.query.width?.toString(),
+            height: req.query.height?.toString()
+        };
+        
+        const imagePath = await imagesService(param);
+        
+        if (imagePath) {
+            //Send file to display image to api.
+            res.sendFile(imagePath, {root: './'});
+        }
+    });
+
+    return images;
+}
+
+export default imageRoute;

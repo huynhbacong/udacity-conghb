@@ -24,8 +24,8 @@ const imagesService = async (query : ImageInfo) : Promise<string | undefined> =>
   const imageName : string = query.filename + imageExtension;
   const _thumbName : string = query.filename + thumb + imageExtension;
 
-  let imagePath = path.join(imagesFolderPath, imageName);
-  let thumbImagePath = path.join(thumbFolderPath, _thumbName);
+  const imagePath = path.join(imagesFolderPath, imageName);
+  const thumbImagePath = path.join(thumbFolderPath, _thumbName);
 
   //Check if file name is exist
   if (!fs.existsSync(imagePath)) {
@@ -35,7 +35,7 @@ const imagesService = async (query : ImageInfo) : Promise<string | undefined> =>
   
   //Check if image already exist in thumb folder
   if (fs.existsSync(thumbImagePath)) {
-    image = await thumbFolderHandler(query, thumbImagePath, image);
+    image = await thumbFolderHandler(query, thumbImagePath, imagePath, image);
   } else {
     _isAddNew = true;
     image = await imageFolderhandler(query, imagePath);
@@ -52,11 +52,12 @@ const imagesService = async (query : ImageInfo) : Promise<string | undefined> =>
 /**
  * Handle logic to image is exist in thumb folder.
  * @param query A object includes image info.
- * @param thumbImagePath A path of image.
+ * @param thumbImagePath A path of thumb image.
+ * @param ImagePath A path of origin image.
  * @param image A buffer of image file.
  * @returns A promise that resolves a buffer.
  */
-const thumbFolderHandler = async (query : ImageInfo, thumbImagePath: string, image : Buffer) : Promise<Buffer> => {
+const thumbFolderHandler = async (query : ImageInfo, thumbImagePath: string, imagePath: string, image : Buffer) : Promise<Buffer> => {
   const originImage : ImageDataParams = await getImageInfo(thumbImagePath);
 
   let width : string = originImage.width.toString();
@@ -70,14 +71,14 @@ const thumbFolderHandler = async (query : ImageInfo, thumbImagePath: string, ima
     width = query.width ?? width;
     height = query.height ?? height;
 
-    image  = await resize(thumbImagePath, parseInt(width), parseInt(height));
+    image  = await resize(imagePath, parseInt(width), parseInt(height));
   }
 
   return new Promise<Buffer>(resolve => resolve(image));
 }
 
 /**
- * Handle logic to image is exist in images folder.
+ * Handle logic to image is exist in images folder.   
  * @param query A object includes image info.
  * @param imagePath A path of image.
  * @returns A promise that resolves a buffer.

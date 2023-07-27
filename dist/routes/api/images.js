@@ -15,12 +15,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const imagesService_1 = __importDefault(require("../../services/imagesService"));
 const images = express_1.default.Router();
-images.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let param = req.query;
-    const imagePath = yield (0, imagesService_1.default)(param);
-    if (imagePath) {
-        res.sendFile(imagePath, { root: './' });
-    }
-}));
-exports.default = images;
+const imageRoute = () => {
+    images.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a, _b, _c;
+        if (req.query.width != null && isNaN(Number(req.query.width))) {
+            throw new Error("Width must be a number.");
+        }
+        ;
+        if (req.query.height != null && isNaN(Number(req.query.height))) {
+            throw new Error("Height must be a number.");
+        }
+        ;
+        const param = {
+            filename: (_a = req.query.filename) === null || _a === void 0 ? void 0 : _a.toString(),
+            width: (_b = req.query.width) === null || _b === void 0 ? void 0 : _b.toString(),
+            height: (_c = req.query.height) === null || _c === void 0 ? void 0 : _c.toString()
+        };
+        const imagePath = yield (0, imagesService_1.default)(param);
+        if (imagePath) {
+            //Send file to display image to api.
+            res.sendFile(imagePath, { root: './' });
+        }
+    }));
+    return images;
+};
+exports.default = imageRoute;
 //# sourceMappingURL=images.js.map
