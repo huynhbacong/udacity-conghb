@@ -47,8 +47,11 @@ describe('Images Service', () => {
         if (fs_1.default.existsSync(testImageFilePath)) {
             fs_1.default.unlinkSync(testImageFilePath);
         }
-        if (fs_1.default.existsSync(testThumbFilePath)) {
-            fs_1.default.unlinkSync(testThumbFilePath);
+        if (fs_1.default.existsSync(testThumbFolderPath)) {
+            const files = fs_1.default.readdirSync(testThumbFolderPath);
+            files.map(file => {
+                fs_1.default.unlinkSync(path_1.default.join(testThumbFolderPath, file));
+            });
         }
     });
     // Test the imagesService function

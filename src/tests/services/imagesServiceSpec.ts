@@ -38,8 +38,12 @@ describe('Images Service', () => {
     if (fs.existsSync(testImageFilePath)) {
       fs.unlinkSync(testImageFilePath);
     }
-    if (fs.existsSync(testThumbFilePath)) {
-      fs.unlinkSync(testThumbFilePath);
+    
+    if (fs.existsSync(testThumbFolderPath)) {
+      const files = fs.readdirSync(testThumbFolderPath);
+      files.map(file => {
+        fs.unlinkSync(path.join(testThumbFolderPath, file));
+      })
     }
   });
 
