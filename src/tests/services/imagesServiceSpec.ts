@@ -1,42 +1,9 @@
-// import path from 'path';
-// import { ImageInfo } from '../../routes/api/images';
-// import imagesService from '../../services/imagesService';
-// import {promises as fsPromise} from 'fs';
-// import { mock } from 'node:test';
-
-const storagePath = 'storage';
-// const myServiceObj = jasmine.createSpyObj('imagesService', [], {
-//     'imagesFolderPath' : storageTestPath
-// })
-
-// describe('Testing images service file', () => {
-//     const thumbPathFiles = path.join(storageTestPath,'thumb');
-//     beforeAll(() => {
-//         mock.
-//     })
-//     beforeEach(async () => {
-//         const files = await fsPromise.readdir(thumbPathFiles);
-          
-//         for (const file of files) {
-//             fsPromise.unlink(path.join(thumbPathFiles, file));
-//         }
-//     });
-
-//     it('It should return success', async () => {
-//         expect(await imagesService(query)).toBeTruthy();
-//     });
-
-    
-// })
-
-// const query : ImageInfo = {
-//     filename: 'palmtunnel'
-// }
 
 import fs from 'fs';
 import path from 'path';
 import imagesService from '../../services/imagesService'; // Assuming the service is exported from imagesService.ts
 
+const storagePath = 'storage';
 describe('Images Service', () => {
   const testImageFolderPath = path.join(storagePath, 'images');
   const testThumbFolderPath = path.join(storagePath, 'thumb');

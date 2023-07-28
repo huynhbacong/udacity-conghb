@@ -31,6 +31,7 @@ const imagesService = async (query : ImageInfo) : Promise<string | undefined> =>
   if (!fs.existsSync(imagePath)) {
     throw new Error("File name does not exist.");
   }
+  
   let image : Buffer = await sharp(imagePath).toBuffer();
   
   //Check if image already exist in thumb folder

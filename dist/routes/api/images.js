@@ -14,9 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const imagesService_1 = __importDefault(require("../../services/imagesService"));
+const logger_1 = __importDefault(require("../utilities/logger"));
+const logError_1 = __importDefault(require("../utilities/logError"));
 const images = express_1.default.Router();
 const imageRoute = () => {
-    images.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    images.get('/', logger_1.default, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         var _a, _b, _c;
         if (req.query.width != null && isNaN(Number(req.query.width))) {
             throw new Error("Width must be a number.");
@@ -31,10 +33,16 @@ const imageRoute = () => {
             width: (_b = req.query.width) === null || _b === void 0 ? void 0 : _b.toString(),
             height: (_c = req.query.height) === null || _c === void 0 ? void 0 : _c.toString()
         };
-        const imagePath = yield (0, imagesService_1.default)(param);
-        if (imagePath) {
-            //Send file to display image to api.
-            res.sendFile(imagePath, { root: './' });
+        try {
+            const imagePath = yield (0, imagesService_1.default)(param);
+            if (imagePath) {
+                //Send file to display image to api.
+                res.sendFile(imagePath, { root: './' });
+            }
+        }
+        catch (ex) {
+            (0, logError_1.default)(ex, req.url);
+            next(ex);
         }
     }));
     return images;

@@ -1,9 +1,5 @@
-import express from "express";
-
-const logError = (req: express.Request, res: express.Response, next: Function): void => {
-    let url = req.url;
-    console.log(`${url} has error: ${res.errored}.`);
-    next();
+const logError = (err: Error, property : string): void => {
+    console.log(`${property} has ${err}.`);
 }
 
 export default logError;

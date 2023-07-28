@@ -1,9 +1,4 @@
 "use strict";
-// import path from 'path';
-// import { ImageInfo } from '../../routes/api/images';
-// import imagesService from '../../services/imagesService';
-// import {promises as fsPromise} from 'fs';
-// import { mock } from 'node:test';
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -17,31 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const storagePath = 'storage';
-// const myServiceObj = jasmine.createSpyObj('imagesService', [], {
-//     'imagesFolderPath' : storageTestPath
-// })
-// describe('Testing images service file', () => {
-//     const thumbPathFiles = path.join(storageTestPath,'thumb');
-//     beforeAll(() => {
-//         mock.
-//     })
-//     beforeEach(async () => {
-//         const files = await fsPromise.readdir(thumbPathFiles);
-//         for (const file of files) {
-//             fsPromise.unlink(path.join(thumbPathFiles, file));
-//         }
-//     });
-//     it('It should return success', async () => {
-//         expect(await imagesService(query)).toBeTruthy();
-//     });
-// })
-// const query : ImageInfo = {
-//     filename: 'palmtunnel'
-// }
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const imagesService_1 = __importDefault(require("../../services/imagesService")); // Assuming the service is exported from imagesService.ts
+const storagePath = 'storage';
 describe('Images Service', () => {
     const testImageFolderPath = path_1.default.join(storagePath, 'images');
     const testThumbFolderPath = path_1.default.join(storagePath, 'thumb');

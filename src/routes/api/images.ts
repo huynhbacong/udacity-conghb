@@ -1,5 +1,7 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import imagesService from "../../services/imagesService";
+import logger from "../utilities/logger";
+import logError from "../utilities/logError";
 
 const images = express.Router();
 
@@ -10,7 +12,7 @@ export interface ImageInfo {
 }
 
 const imageRoute = () : express.Router => {
-    images.get('/', async (req : express.Request, res : express.Response) : Promise<void> => {
+    images.get('/', logger, async (req : express.Request, res : express.Response, next : NextFunction) : Promise<void> => {
         if(req.query.width != null && isNaN(Number(req.query.width))) {
             throw new Error("Width must be a number.");
         };
@@ -24,12 +26,16 @@ const imageRoute = () : express.Router => {
             width: req.query.width?.toString(),
             height: req.query.height?.toString()
         };
-        
-        const imagePath = await imagesService(param);
-        
-        if (imagePath) {
-            //Send file to display image to api.
-            res.sendFile(imagePath, {root: './'});
+
+        try {
+            const imagePath = await imagesService(param);
+            if (imagePath) {
+                //Send file to display image to api.
+                res.sendFile(imagePath, {root: './'});
+            }
+        } catch (ex :Error | any) {
+            logError(ex,req.url);
+            next(ex);
         }
     });
 

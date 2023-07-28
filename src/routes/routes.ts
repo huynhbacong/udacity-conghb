@@ -1,11 +1,9 @@
 import express from "express";
 import imageRoute from "./api/images";
-import logger from "./utilities/logger";
-import logError from "./utilities/logError";
 
 const routes = express.Router();
 
-routes.get('/', logger, logError, (req, res) => {
+routes.get('/', (req : express.Request, res : express.Response) : void => {
     res.send('api connected!');
 });
 

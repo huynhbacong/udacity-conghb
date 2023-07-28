@@ -16,7 +16,7 @@ const supertest_1 = __importDefault(require("supertest"));
 const app_1 = __importDefault(require("../app"));
 const request = (0, supertest_1.default)(app_1.default);
 it('test app api', () => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield request.get('/api/images').query({ filename: 'fjord' });
+    const response = yield request.get('/api/images').query({ filename: 'testImage' });
     expect(response.status).toBe(200);
 }));
 //# sourceMappingURL=appSpec.js.map
